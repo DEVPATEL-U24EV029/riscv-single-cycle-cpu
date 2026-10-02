@@ -1,1 +1,7 @@
+# Verilog simulation outputs
+*_sim
+*.vvp
+*.vcd
 
+# macOS
+.DS_Store
