@@ -7,8 +7,7 @@ module instruction_memory (
     reg [31:0] memory [0:255];
     integer i;
 
-    // Initialize unused locations to the RV32I NOP (ADDI x0, x0, 0).
-  
+    // Start with NOPs so fetching past the sample program stays deterministic.
     initial begin
         for (i = 0; i < 256; i = i + 1) begin
             memory[i] = 32'h00000013;
@@ -21,7 +20,7 @@ module instruction_memory (
         memory[4] = 32'h00000213;
     end
 
-    // Each instruction is 4 bytes; address[1:0] is ignored as it will give memory 0 ,1,2 so
+    // Instructions are 4 bytes, so address[1:0] does not affect the word index.
     assign instruction = memory[address[9:2]];
 
 endmodule
